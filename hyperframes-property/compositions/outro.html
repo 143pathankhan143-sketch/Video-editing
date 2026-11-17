@@ -1,0 +1,206 @@
+<template>
+  <style>
+    
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-ExtraBold.ttf") format("truetype");
+        font-weight: 800;
+        font-style: normal;
+      }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "MuktaLocal", sans-serif;
+      overflow: hidden;
+    }
+    .outro-bg {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      object-fit: cover;
+    }
+    .outro-dim {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.78);
+    }
+    .progress-bar-end {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 8px;
+      background: #FBBF24;
+      transform-origin: left center;
+    }
+    .outro-card {
+      position: absolute;
+      left: 110px;
+      width: 860px;
+      top: 320px;
+      padding: 44px 40px 38px;
+      border-radius: 40px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 3.5px solid #FBBF24;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.65);
+    }
+    .outro-pill {
+      padding: 8px 32px;
+      border-radius: 999px;
+      background: #FBBF24;
+      color: #0F172A;
+      font-size: 32px;
+      font-weight: 800;
+    }
+    .outro-title {
+      color: #FFFFFF;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .outro-sub {
+      color: #38BDF8;
+      font-size: 30px;
+      font-weight: 600;
+      margin-top: -10px;
+      text-align: center;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+    .spec-box {
+      background: #1E293B;
+      border: 2px solid rgba(56, 189, 248, 0.35);
+      border-radius: 22px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .spec-lbl {
+      color: #CBD5E1;
+      font-size: 29px;
+      font-weight: 600;
+    }
+    .spec-val {
+      color: #FFFFFF;
+      font-size: 33px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+    .spec-val.green { color: #34D399; }
+    .price-box {
+      width: 100%;
+      background: #064E3B;
+      border: 3px solid #FBBF24;
+      border-radius: 28px;
+      padding: 18px;
+      text-align: center;
+    }
+    .price-lbl {
+      color: #A7F3D0;
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .price-big {
+      color: #FBBF24;
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.12;
+    }
+    .cta-btn {
+      width: 100%;
+      background: #F59E0B;
+      color: #0F172A;
+      border-radius: 999px;
+      padding: 20px 24px;
+      font-size: 35px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .outro-foot {
+      color: #E2E8F0;
+      font-size: 29px;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <img id="outro-bg-img" class="clip outro-bg" src="assets/video/outro_backdrop.jpg" alt="" data-start="0" data-duration="2.98" data-track-index="0" data-layout-ignore />
+    <div id="outro-dim-layer" class="outro-dim" data-layout-ignore></div>
+    <div id="outro-prog" class="progress-bar-end" data-layout-ignore></div>
+    <div id="outro-card-clip" class="clip" data-start="0" data-duration="2.98" data-track-index="1">
+      <div id="outro-card-inner" class="outro-card">
+        <div class="outro-pill">स्वतंत्र घर विक्रीसाठी</div>
+        <div class="outro-title" data-var-text="propertyLocation">जुना औसा रोड, लातूर</div>
+        <div class="outro-sub">व्हीआयपी बंगलो परिसर • पूर्ण विकसित</div>
+        <div class="spec-grid">
+          <div class="spec-box">
+            <div class="spec-lbl">एकूण खोल्या</div>
+            <div class="spec-val">७ रूम (1BHK+1BHK)</div>
+          </div>
+          <div class="spec-box">
+            <div class="spec-lbl">प्लॉट साईज</div>
+            <div class="spec-val">२५ × ३० चौ. फूट</div>
+          </div>
+          <div class="spec-box">
+            <div class="spec-lbl">पार्किंग सुविधा</div>
+            <div class="spec-val green">इनोव्हा पार्किंग</div>
+          </div>
+          <div class="spec-box">
+            <div class="spec-lbl">पाणी व उत्पन्न</div>
+            <div class="spec-val green">बोर + भाडे संधी</div>
+          </div>
+        </div>
+        <div class="price-box">
+          <div class="price-lbl">मालकाची अपेक्षित किंमत</div>
+          <div class="price-big" data-var-text="askingPrice">फक्त ₹९० लाख</div>
+        </div>
+        <div id="outro-cta-btn" class="cta-btn" data-var-text="ctaText">साईट व्हिजिटसाठी संपर्क / DM करा</div>
+        <div class="outro-foot">स्वतंत्र घर • रो-हाऊस नाही</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#outro-prog", { scaleX: 0.8693 }, { scaleX: 1, duration: 2.98, ease: "none" }, 0);
+    tl.fromTo("#outro-card-inner",
+      { opacity: 0, y: 42, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "power3.out" },
+      0.02
+    );
+    tl.fromTo("#outro-cta-btn",
+      { scale: 0.97 },
+      { scale: 1.02, duration: 0.55, yoyo: true, repeat: 2, ease: "sine.inOut" },
+      0.42
+    );
+    window.__timelines = window.__timelines || {};
+    window.__timelines["outro"] = tl;
+  </script>
+</template>

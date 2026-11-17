@@ -1,0 +1,26 @@
+{
+  "name": "video-editing",
+  "version": "1.0.0",
+  "description": "HyperFrames HTML-to-MP4 Video Editing Workspace",
+  "scripts": {
+    "setup": "bash scripts/setup-hyperframes.sh",
+    "studio": "bash scripts/setup-hyperframes.sh && node scripts/studio-preview.mjs hyperframes-property",
+    "doctor": "HYPERFRAMES_BROWSER_PATH=/opt/hyperframes-deps/bin/chrome-headless-shell hyperframes doctor",
+    "lint": "HYPERFRAMES_BROWSER_PATH=/opt/hyperframes-deps/bin/chrome-headless-shell hyperframes lint hyperframes-property",
+    "check": "HYPERFRAMES_BROWSER_PATH=/opt/hyperframes-deps/bin/chrome-headless-shell hyperframes check hyperframes-property",
+    "snapshot": "HYPERFRAMES_BROWSER_PATH=/opt/hyperframes-deps/bin/chrome-headless-shell hyperframes snapshot hyperframes-property --at 1.2,7.2,16.1,21.5 --output /tmp/hf_snaps",
+    "render": "HYPERFRAMES_BROWSER_PATH=/opt/hyperframes-deps/bin/chrome-headless-shell hyperframes render hyperframes-property --output output/Latur_Property_HyperFrames_Render.mp4 --quality standard --fps 30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/143pathankhan143-sketch/Video-editing.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@sparticuz/chromium": "^153.0.0",
+    "gsap": "^3.15.1",
+    "hyperframes": "^0.9.59"
+  }
+}

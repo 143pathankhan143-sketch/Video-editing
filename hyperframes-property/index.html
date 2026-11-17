@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="mr" data-resolution="portrait" data-composition-variables='[{"id": "propertyLocation", "type": "string", "label": "Property Location", "default": "जुना औसा रोड, लातूर"}, {"id": "saleTag", "type": "string", "label": "Header Badge", "default": "विक्रीसाठी घर"}, {"id": "askingPrice", "type": "string", "label": "Asking Price", "default": "फक्त ₹९० लाख"}, {"id": "ctaText", "type": "string", "label": "CTA Button Text", "default": "साईट व्हिजिटसाठी संपर्क / DM करा"}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Latur Property Reel — HyperFrames Project</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #020617;
+        --accent-gold: #F59E0B;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+      .bg-fill {
+        position: absolute;
+        inset: 0;
+        background: #020617;
+        z-index: 0;
+      }
+      .stage-video {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+        z-index: 1;
+      }
+      .scene-overlays {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+      }
+      .scene-captions {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+      }
+      .scene-outro {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="22.8"
+      data-fps="30"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div class="bg-fill" data-layout-ignore></div>
+
+      <!-- Lane 0: Trimmed Property Walkthrough Video Clips -->
+      <video id="vid-c01" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="0.0" data-duration="3.15" data-media-start="1.5" data-track-index="0" data-link="link-c01" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c02" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="3.15" data-duration="1.91" data-media-start="5.23" data-track-index="0" data-link="link-c02" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c03" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="5.06" data-duration="3.67" data-media-start="7.67" data-track-index="0" data-link="link-c03" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c04" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="8.73" data-duration="1.6" data-media-start="12.22" data-track-index="0" data-link="link-c04" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c05" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="10.33" data-duration="1.17" data-media-start="14.13" data-track-index="0" data-link="link-c05" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c06" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="11.5" data-duration="1.53" data-media-start="17.35" data-track-index="0" data-link="link-c06" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c07" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="13.03" data-duration="1.0" data-media-start="19.28" data-track-index="0" data-link="link-c07" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c08" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="14.03" data-duration="1.64" data-media-start="21.74" data-track-index="0" data-link="link-c08" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c09" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="15.67" data-duration="1.16" data-media-start="23.97" data-track-index="0" data-link="link-c09" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c10" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="16.83" data-duration="1.07" data-media-start="30.23" data-track-index="0" data-link="link-c10" muted playsinline data-layout-allow-overflow></video>
+      <video id="vid-c11" class="clip stage-video" src="assets/video/source_hd.mp4" data-start="17.9" data-duration="1.92" data-media-start="41.85" data-track-index="0" data-link="link-c11" muted playsinline data-layout-allow-overflow></video>
+
+      <!-- Lane 1: Motion Graphics Overlays & Closing Summary Card -->
+      <div
+        id="overlays"
+        class="clip scene-overlays"
+        data-composition-id="overlays"
+        data-composition-src="compositions/overlays.html"
+        data-start="0"
+        data-duration="19.82"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+      <div
+        id="outro"
+        class="clip scene-outro"
+        data-composition-id="outro"
+        data-composition-src="compositions/outro.html"
+        data-start="19.82"
+        data-duration="2.98"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <!-- Lane 2: Marathi Devanagari Captions Track -->
+      <div
+        id="captions"
+        class="clip scene-captions"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="19.82"
+        data-track-index="2"
+        data-track-kind="captions"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <!-- Lane 3: Cleaned Marathi Voiceover Clips (Linked 1:1 with Video Clips) -->
+      <audio id="vo-c01" class="clip" src="assets/audio/voice_cleaned.wav" data-start="0.0" data-duration="3.15" data-media-start="1.5" data-track-index="3" data-link="link-c01" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c02" class="clip" src="assets/audio/voice_cleaned.wav" data-start="3.15" data-duration="1.91" data-media-start="5.23" data-track-index="3" data-link="link-c02" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c03" class="clip" src="assets/audio/voice_cleaned.wav" data-start="5.06" data-duration="3.67" data-media-start="7.67" data-track-index="3" data-link="link-c03" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c04" class="clip" src="assets/audio/voice_cleaned.wav" data-start="8.73" data-duration="1.6" data-media-start="12.22" data-track-index="3" data-link="link-c04" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c05" class="clip" src="assets/audio/voice_cleaned.wav" data-start="10.33" data-duration="1.17" data-media-start="14.13" data-track-index="3" data-link="link-c05" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c06" class="clip" src="assets/audio/voice_cleaned.wav" data-start="11.5" data-duration="1.53" data-media-start="17.35" data-track-index="3" data-link="link-c06" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c07" class="clip" src="assets/audio/voice_cleaned.wav" data-start="13.03" data-duration="1.0" data-media-start="19.28" data-track-index="3" data-link="link-c07" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c08" class="clip" src="assets/audio/voice_cleaned.wav" data-start="14.03" data-duration="1.64" data-media-start="21.74" data-track-index="3" data-link="link-c08" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c09" class="clip" src="assets/audio/voice_cleaned.wav" data-start="15.67" data-duration="1.16" data-media-start="23.97" data-track-index="3" data-link="link-c09" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c10" class="clip" src="assets/audio/voice_cleaned.wav" data-start="16.83" data-duration="1.07" data-media-start="30.23" data-track-index="3" data-link="link-c10" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+      <audio id="vo-c11" class="clip" src="assets/audio/voice_cleaned.wav" data-start="17.9" data-duration="1.92" data-media-start="41.85" data-track-index="3" data-link="link-c11" data-volume="1" data-fade-in="0.03" data-fade-out="0.03"></audio>
+
+      <!-- Lane 4: Motion-Graphic Sound Effects -->
+      <audio id="sfx-01" class="clip" src="assets/audio/sfx_whoosh.wav" data-start="0.05" data-duration="0.34" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-02" class="clip" src="assets/audio/sfx_pop.wav" data-start="3.19" data-duration="0.14" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-03" class="clip" src="assets/audio/sfx_pop.wav" data-start="5.1" data-duration="0.14" data-track-index="4" data-volume="0.4"></audio>
+      <audio id="sfx-04" class="clip" src="assets/audio/sfx_chime.wav" data-start="6.82" data-duration="1.15" data-track-index="4" data-volume="0.55"></audio>
+      <audio id="sfx-05" class="clip" src="assets/audio/sfx_pop.wav" data-start="8.77" data-duration="0.14" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-06" class="clip" src="assets/audio/sfx_pop.wav" data-start="10.37" data-duration="0.14" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-07" class="clip" src="assets/audio/sfx_whoosh.wav" data-start="11.54" data-duration="0.34" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-08" class="clip" src="assets/audio/sfx_whoosh.wav" data-start="14.07" data-duration="0.34" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-09" class="clip" src="assets/audio/sfx_pop.wav" data-start="15.71" data-duration="0.14" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-10" class="clip" src="assets/audio/sfx_pop.wav" data-start="16.87" data-duration="0.14" data-track-index="4" data-volume="0.42"></audio>
+      <audio id="sfx-11" class="clip" src="assets/audio/sfx_sparkle.wav" data-start="17.96" data-duration="0.75" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-12" class="clip" src="assets/audio/sfx_outro_swell.wav" data-start="19.82" data-duration="2.60" data-track-index="4" data-volume="0.50"></audio>
+
+      <!-- Lane 5: Warm Real-Estate Acoustic Background Bed -->
+      <audio
+        id="bgm-bed"
+        class="clip"
+        src="assets/audio/bgm_warm_estate.wav"
+        data-start="0"
+        data-duration="22.8"
+        data-track-index="5"
+        data-volume="0.14"
+        data-fade-in="0.35"
+        data-fade-out="0.55"
+      ></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#vid-c01", { scale: 1.0 }, { scale: 1.06, duration: 3.15, ease: "none" }, 0.0);
+      tl.fromTo("#vid-c02", { scale: 1.06 }, { scale: 1.1, duration: 1.91, ease: "none" }, 3.15);
+      tl.fromTo("#vid-c03", { scale: 1.02 }, { scale: 1.08, duration: 3.67, ease: "none" }, 5.06);
+      tl.fromTo("#vid-c04", { scale: 1.0 }, { scale: 1.03, duration: 1.6, ease: "none" }, 8.73);
+      tl.fromTo("#vid-c05", { scale: 1.0 }, { scale: 1.02, duration: 1.17, ease: "none" }, 10.33);
+      tl.fromTo("#vid-c06", { scale: 1.0 }, { scale: 1.02, duration: 1.53, ease: "none" }, 11.5);
+      tl.fromTo("#vid-c07", { scale: 1.0 }, { scale: 1.02, duration: 1.0, ease: "none" }, 13.03);
+      tl.fromTo("#vid-c08", { scale: 1.0 }, { scale: 1.02, duration: 1.64, ease: "none" }, 14.03);
+      tl.fromTo("#vid-c09", { scale: 1.0 }, { scale: 1.02, duration: 1.16, ease: "none" }, 15.67);
+      tl.fromTo("#vid-c10", { scale: 1.0 }, { scale: 1.03, duration: 1.07, ease: "none" }, 16.83);
+      tl.fromTo("#vid-c11", { scale: 1.0 }, { scale: 1.04, duration: 1.92, ease: "none" }, 17.9);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

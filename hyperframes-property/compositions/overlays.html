@@ -1,0 +1,370 @@
+<template>
+  <style>
+    
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "MuktaLocal";
+        src: url("assets/fonts/Mukta-ExtraBold.ttf") format("truetype");
+        font-weight: 800;
+        font-style: normal;
+      }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "MuktaLocal", sans-serif;
+      pointer-events: none;
+    }
+    .progress-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 8px;
+      background: #FBBF24;
+      transform-origin: left center;
+    }
+    .top-scrim {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 240px;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.78) 0%, rgba(2, 6, 23, 0) 100%);
+    }
+    .bottom-scrim {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 1080px;
+      height: 760px;
+      background: linear-gradient(0deg, rgba(2, 6, 23, 0.80) 0%, rgba(2, 6, 23, 0.36) 55%, rgba(2, 6, 23, 0) 100%);
+    }
+    .header-bar {
+      position: absolute;
+      top: 230px;
+      left: 84px;
+      right: 200px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .loc-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.90);
+      border: 2.5px solid rgba(56, 189, 248, 0.65);
+      color: #F8FAFC;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .loc-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #EF4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.32);
+    }
+    .sale-pill {
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: var(--accent-gold, #F59E0B);
+      color: #0F172A;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    /* Placed safely inside Instagram Reels / TikTok / YouTube Shorts safe zone! */
+    .badge-slot {
+      position: absolute;
+      left: 84px;
+      top: 970px;
+      width: 720px;
+      height: 164px;
+      overflow: visible;
+    }
+    .badge-card {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      width: 700px;
+      padding: 18px 26px;
+      border-radius: 28px;
+      background: rgba(15, 23, 42, 0.93);
+      border: 3px solid var(--accent, #38BDF8);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+    .badge-card.price-hero {
+      background: rgba(6, 78, 59, 0.95);
+      border-color: #FBBF24;
+    }
+    .badge-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .badge-label {
+      color: #CBD5E1;
+      font-size: 29px;
+      font-weight: 600;
+      line-height: 1.18;
+    }
+    .badge-val {
+      color: #FFFFFF;
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    .badge-card.price-hero .badge-val {
+      color: #FBBF24;
+    }
+  </style>
+  <div id="root" data-composition-id="overlays" data-width="1080" data-height="1920">
+    <div id="ov-chrome" class="clip" data-start="0" data-duration="19.82" data-track-index="0">
+      <div class="top-scrim" data-layout-ignore></div>
+      <div class="bottom-scrim" data-layout-ignore></div>
+      <div id="ov-progress" class="progress-bar-fill" data-layout-ignore></div>
+      <div id="ov-header-inner" class="header-bar">
+        <div class="loc-pill">
+          <span class="loc-dot"></span>
+          <span data-var-text="propertyLocation">जुना औसा रोड, लातूर</span>
+        </div>
+        <div class="sale-pill" data-var-text="saleTag">विक्रीसाठी घर</div>
+      </div>
+    </div>
+    
+    <div id="badge-c01" class="clip badge-slot" data-start="0.0" data-duration="3.13" data-track-index="1">
+      <div id="badge-c01-inner" class="badge-card" style="--accent: #38BDF8;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M22 4C14 4 8 10 8 18c0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14z" fill="#38BDF8"/><circle cx="22" cy="18" r="5.5" fill="#0F172A"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">प्राईम लोकेशन • लातूर</div>
+          <div class="badge-val">जुना औसा रोड</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c02" class="clip badge-slot" data-start="3.15" data-duration="1.89" data-track-index="1">
+      <div id="badge-c02-inner" class="badge-card" style="--accent: #F59E0B;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M6 22L22 7l16 15h-4v14H10V22H6z" fill="#F59E0B"/><rect x="18" y="25" width="8" height="11" rx="2" fill="#0F172A"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">दुमजली रचना</div>
+          <div class="badge-val">खाली 1BHK + वरी 1BHK</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c03" class="clip badge-slot" data-start="5.06" data-duration="3.65" data-track-index="1">
+      <div id="badge-c03-inner" class="badge-card price-hero" style="--accent: #10B981;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><rect x="4" y="8" width="36" height="28" rx="8" fill="#FBBF24"/><text x="22" y="30" text-anchor="middle" font-family="MuktaLocal, sans-serif" font-weight="800" font-size="24" fill="#0F172A">₹</text></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">एकूण ७ रूम • आकर्षक किंमत</div>
+          <div class="badge-val" data-var-text="askingPrice">फक्त ₹९० लाख</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c04" class="clip badge-slot" data-start="8.73" data-duration="1.58" data-track-index="1">
+      <div id="badge-c04-inner" class="badge-card" style="--accent: #38BDF8;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><rect x="6" y="6" width="14" height="14" rx="3" fill="#38BDF8"/><rect x="24" y="6" width="14" height="14" rx="3" fill="#38BDF8"/><rect x="6" y="24" width="14" height="14" rx="3" fill="#38BDF8"/><rect x="24" y="24" width="14" height="14" rx="3" fill="#38BDF8"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">प्लॉट साईज (क्षेत्रफळ)</div>
+          <div class="badge-val">२५ × ३० चौ. फूट</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c05" class="clip badge-slot" data-start="10.33" data-duration="1.15" data-track-index="1">
+      <div id="badge-c05-inner" class="badge-card" style="--accent: #F59E0B;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M5 24l5-11h24l5 11v9H5v-9z" fill="#F59E0B"/><circle cx="13" cy="33" r="4.5" fill="#FFF"/><circle cx="31" cy="33" r="4.5" fill="#FFF"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">प्रशस्त कव्हर्ड पार्किंग</div>
+          <div class="badge-val">इनोव्हा पार्किंग</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c06" class="clip badge-slot" data-start="11.5" data-duration="2.45" data-track-index="1">
+      <div id="badge-c06-inner" class="badge-card" style="--accent: #10B981;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M22 4l15 6v11c0 10-15 18-15 18S7 31 7 21V10l15-6z" fill="#10B981"/><path d="M15 22l5 5 9-10" stroke="#0F172A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">प्रॉपर्टी प्रकार</div>
+          <div class="badge-val">स्वतंत्र घर • रो-हाऊस नाही</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c08" class="clip badge-slot" data-start="14.03" data-duration="1.62" data-track-index="1">
+      <div id="badge-c08-inner" class="badge-card" style="--accent: #38BDF8;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M22 4C14 4 8 10 8 18c0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14z" fill="#38BDF8"/><circle cx="22" cy="18" r="5.5" fill="#0F172A"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">परिसर आणि कनेक्टिव्हिटी</div>
+          <div class="badge-val">पूर्ण विकसित परिसर</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c09" class="clip badge-slot" data-start="15.67" data-duration="1.14" data-track-index="1">
+      <div id="badge-c09-inner" class="badge-card" style="--accent: #F59E0B;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><polygon points="22,4 27,16 40,16 29,24 33,37 22,29 11,37 15,24 4,16 17,16" fill="#F59E0B"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">प्रीमियम सोसायटी परिसर</div>
+          <div class="badge-val">व्हीआयपी बंगले</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c10" class="clip badge-slot" data-start="16.83" data-duration="1.05" data-track-index="1">
+      <div id="badge-c10-inner" class="badge-card" style="--accent: #38BDF8;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><path d="M22 5s14 15 14 23c0 8-6 13-14 13S8 36 8 28C8 20 22 5 22 5z" fill="#38BDF8"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">पाण्याची सोय</div>
+          <div class="badge-val">पाण्याचा बोर</div>
+        </div>
+      </div>
+    </div>
+    <div id="badge-c11" class="clip badge-slot" data-start="17.9" data-duration="1.9" data-track-index="1">
+      <div id="badge-c11-inner" class="badge-card" style="--accent: #10B981;">
+        <div class="badge-icon"><svg width="42" height="42" viewBox="0 0 44 44"><circle cx="22" cy="22" r="14" fill="#10B981"/></svg></div>
+        <div class="badge-copy">
+          <div class="badge-label">गुंतवणूक व भाडे उत्पन्न</div>
+          <div class="badge-val">भाडे उत्पन्न संधी</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#ov-progress", { scaleX: 0 }, { scaleX: 0.8693, duration: 19.82, ease: "none" }, 0);
+    tl.fromTo("#ov-header-inner",
+      { opacity: 0, y: -24 },
+      { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+      0.02
+    );
+    
+    tl.fromTo("#badge-c01-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      0.0
+    );
+    tl.fromTo("#badge-c01-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      2.97
+    );
+    tl.fromTo("#badge-c02-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      3.15
+    );
+    tl.fromTo("#badge-c02-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      4.88
+    );
+    tl.fromTo("#badge-c03-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      5.06
+    );
+    tl.fromTo("#badge-c03-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      8.55
+    );
+    tl.fromTo("#badge-c04-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      8.73
+    );
+    tl.fromTo("#badge-c04-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      10.15
+    );
+    tl.fromTo("#badge-c05-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      10.33
+    );
+    tl.fromTo("#badge-c05-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      11.32
+    );
+    tl.fromTo("#badge-c06-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      11.5
+    );
+    tl.fromTo("#badge-c06-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      13.79
+    );
+    tl.fromTo("#badge-c08-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      14.03
+    );
+    tl.fromTo("#badge-c08-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      15.49
+    );
+    tl.fromTo("#badge-c09-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      15.67
+    );
+    tl.fromTo("#badge-c09-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      16.65
+    );
+    tl.fromTo("#badge-c10-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      16.83
+    );
+    tl.fromTo("#badge-c10-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      17.72
+    );
+    tl.fromTo("#badge-c11-inner",
+      { opacity: 0, x: -64, scale: 0.94 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.26, ease: "back.out(1.4)" },
+      17.9
+    );
+    tl.fromTo("#badge-c11-inner",
+      { opacity: 1, x: 0, scale: 1 },
+      { opacity: 0, x: -24, scale: 0.97, duration: 0.14, ease: "power2.in", immediateRender: false },
+      19.64
+    );
+    window.__timelines = window.__timelines || {};
+    window.__timelines["overlays"] = tl;
+  </script>
+</template>

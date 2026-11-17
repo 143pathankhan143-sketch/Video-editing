@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+/tmp_*
+node_modules/
+**/.hyperframes/
+hyperframes-property/assets/video/source_hd.mp4

@@ -1,0 +1,175 @@
+{
+  "source_video": "VID-20261112-WA0002.mp4",
+  "source_duration_sec": 57.09,
+  "edited_speech_duration_sec": 19.47,
+  "total_edited_duration_sec": 22.37,
+  "resolution": "1080x1920",
+  "fps": 30,
+  "removed_sections_summary": [
+    "0.00s - 1.50s: Initial dead air before greeting",
+    "4.65s - 5.23s, 7.14s - 7.67s, 11.34s - 12.22s: Breaths, silences & 'अं' filler onset before plot size",
+    "15.30s - 17.35s: Repeated location phrase ('आणि घर आहे आपलं जुना औसा रोडला') + pause",
+    "20.28s - 21.74s: Pause + weaker first take of borewell ('पाण्याचा बोर आहे'), kept cleaner take at 30.23s",
+    "25.13s - 30.23s: Long street-panning pauses & redundant 'हे बघा लोकेशन / सगळ्यांचे बंगले आजूबाजू'",
+    "31.30s - 41.85s: Non-speech knock (33.9s), long pauses & repeated takes of ₹90 Lakh price, 7 rooms & location",
+    "43.77s - 57.09s: Repeated parking remarks + 8.5s silent wandering + loud accidental knock at 54.2s"
+  ],
+  "kept_clips": [
+    {
+      "id": "01_intro_hook",
+      "source_range_sec": [
+        1.5,
+        4.65
+      ],
+      "timeline_range_sec": [
+        0.0,
+        3.15
+      ],
+      "captions_mr": [
+        "नमस्कार लातूरकरांनो!",
+        "आज आपल्यापाशी जुना औसा रोडला घर आलंय."
+      ]
+    },
+    {
+      "id": "02_bhk_config",
+      "source_range_sec": [
+        5.23,
+        7.14
+      ],
+      "timeline_range_sec": [
+        3.115,
+        5.025
+      ],
+      "captions_mr": [
+        "खाली 1BHK आहे, वरी 1BHK आहे."
+      ]
+    },
+    {
+      "id": "03_rooms_and_price",
+      "source_range_sec": [
+        7.67,
+        11.34
+      ],
+      "timeline_range_sec": [
+        4.99,
+        8.66
+      ],
+      "captions_mr": [
+        "आणि खाली १ रूम — टोटल ७ रूम आहेत,",
+        "मालकाचा रेट सांगताय फक्त ₹९० लाख रुपये!"
+      ]
+    },
+    {
+      "id": "04_plot_size",
+      "source_range_sec": [
+        12.22,
+        13.82
+      ],
+      "timeline_range_sec": [
+        8.625,
+        10.225
+      ],
+      "captions_mr": [
+        "जागा साईज आहे २५ × ३० फूट."
+      ]
+    },
+    {
+      "id": "05_innova_parking",
+      "source_range_sec": [
+        14.13,
+        15.3
+      ],
+      "timeline_range_sec": [
+        10.19,
+        11.36
+      ],
+      "captions_mr": [
+        "इनोव्हा गाडीची मोठी पार्किंग आहे."
+      ]
+    },
+    {
+      "id": "06_independent_house",
+      "source_range_sec": [
+        17.35,
+        18.88
+      ],
+      "timeline_range_sec": [
+        11.325,
+        12.855
+      ],
+      "captions_mr": [
+        "हे स्वतंत्र घर आहे — रो-हाऊस नाही!"
+      ]
+    },
+    {
+      "id": "07_stilt_parking",
+      "source_range_sec": [
+        19.28,
+        20.28
+      ],
+      "timeline_range_sec": [
+        12.82,
+        13.82
+      ],
+      "captions_mr": [
+        "ही सगळी खाली पार्किंगच आहे."
+      ]
+    },
+    {
+      "id": "08_developed_locality",
+      "source_range_sec": [
+        21.74,
+        23.38
+      ],
+      "timeline_range_sec": [
+        13.785,
+        15.425
+      ],
+      "captions_mr": [
+        "लोकेशन बघा आजूबाजूला कशी डेव्हलप आहे."
+      ]
+    },
+    {
+      "id": "09_vip_bungalows",
+      "source_range_sec": [
+        23.97,
+        25.13
+      ],
+      "timeline_range_sec": [
+        15.39,
+        16.55
+      ],
+      "captions_mr": [
+        "सगळे व्हीआयपी बंगले आहेत इथं."
+      ]
+    },
+    {
+      "id": "10_borewell_water",
+      "source_range_sec": [
+        30.23,
+        31.3
+      ],
+      "timeline_range_sec": [
+        16.515,
+        17.585
+      ],
+      "captions_mr": [
+        "भरपूर पाण्याचा बोर उपलब्ध आहे."
+      ]
+    },
+    {
+      "id": "11_rental_income",
+      "source_range_sec": [
+        41.85,
+        43.77
+      ],
+      "timeline_range_sec": [
+        17.55,
+        19.47
+      ],
+      "captions_mr": [
+        "सुंदर घर आहे, भाडेकरू पण सहज मिळू शकतात!"
+      ]
+    }
+  ]
+}
