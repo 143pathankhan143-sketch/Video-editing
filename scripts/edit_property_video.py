@@ -18,7 +18,7 @@ Features:
    - Exports matching `.srt` Marathi subtitle file.
 4. Broadcast Audio Mastering & Procedural Sound Design:
    - Cleans raw Marathi voiceover (high-pass 85Hz, spectral noise gate, presence boost, soft compressor).
-   - Synthesizes warm ambient acoustic guitar/pad real-estate background bed (auto-ducked under speech).
+   - Mixes a genuine YouTube Audio Library music track (auto-ducked under speech).
    - Synthesizes & syncs clean motion graphic SFX (soft whooshes, UI pops, luxury chime on ₹90 Lakh reveal, closing swell).
    - Loudness-normalizes final stereo master to ~ -15 LUFS.
 """
@@ -37,7 +37,7 @@ import imageio_ffmpeg
 import numpy as np
 import resvg_py
 import soundfile as sf
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 from scipy.signal import butter, sosfiltfilt
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -47,6 +47,8 @@ OUTPUT_DIR = ROOT / "output"
 OUTPUT_VIDEO = OUTPUT_DIR / "Latur_Property_Edited_Reel.mp4"
 OUTPUT_SRT = OUTPUT_DIR / "Latur_Property_Captions_mr.srt"
 OUTPUT_EDL = OUTPUT_DIR / "edit_decision_list.json"
+BROLL_DIR = ROOT / "hyperframes-property" / "assets" / "broll"
+MUSIC_FILE = ROOT / "hyperframes-property" / "assets" / "music" / "yt_sunny_travel_nico_staf.mp3"
 
 W, H = 1080, 1920
 FPS = 30
@@ -270,6 +272,16 @@ CLIPS: List[ClipSpec] = [
 ]
 
 OUTRO_DURATION = 2.90  # Crisp animated Marathi Property Summary + Site Visit CTA card
+# B-roll is explicitly illustrative stock; preserve the real walkthrough for all other shots.
+# Each value is (asset filename, local timeline start, local timeline end).
+BROLL_CUTAWAYS = {
+    "02_bhk_config": ("pexels_16428573_interior_walkthrough.mp4", 0.0, 1.91),
+    "03_rooms_and_price": ("pexels_16428573_interior_walkthrough.mp4", 0.0, 1.62),
+    "05_innova_parking": ("pexels_car_parking.mp4", 0.0, 1.17),
+    "08_developed_locality": ("pexels_8440736_estate_aerial.mp4", 0.0, 1.64),
+    "09_vip_bungalows": ("pexels_14502236_bungalows_aerial.mp4", 0.0, 1.16),
+    "11_rental_income": ("pexels_living_room.webp", 0.0, 1.92),
+}
 CROSSFADE_SEC = 0.035  # 35ms seamless audio crossfade between tight sentence cuts
 
 
@@ -358,6 +370,15 @@ def make_caption_pill(svg_tspan_text: str) -> Image.Image:
       <rect x="20" y="24" width="960" height="156" rx="36" fill="#090D16" fill-opacity="0.88" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2.5"/>
       <rect x="44" y="54" width="8" height="96" rx="4" fill="#FBBF24"/>
       <text x="512" y="121" text-anchor="middle" font-family="Mukta" font-weight="800" font-size="50" fill="#FFFFFF">{svg_tspan_text}</text>
+    </svg>'''
+    return render_svg_rgba(svg)
+
+
+def make_stock_badge() -> Image.Image:
+    """Small, legible label that makes generic stock cutaways explicit."""
+    svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="390" height="62" viewBox="0 0 390 62">
+      <rect x="1" y="1" width="388" height="60" rx="30" fill="#07111F" fill-opacity="0.86" stroke="#FFFFFF" stroke-opacity="0.34" stroke-width="2"/>
+      <text x="195" y="41" text-anchor="middle" font-family="Mukta" font-weight="700" font-size="26" fill="#FFFFFF">प्रातिनिधिक दृश्य • Pexels</text>
     </svg>'''
     return render_svg_rgba(svg)
 
@@ -644,6 +665,60 @@ def format_srt_ts(sec: float) -> str:
     return f"{hh:02d}:{mm:02d}:{ss:02d},{mmm:03d}"
 
 
+def fit_broll_frame(frame: Image.Image) -> Image.Image:
+    """Crop stock footage to a portrait-safe 9:16 composition without stretching."""
+    return ImageOps.fit(frame.convert("RGB"), (540, 960), method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
+
+
+def load_broll_frames() -> dict:
+    """Load only the short illustrative sections used on this timeline."""
+    cache = {}
+    for clip_id, (filename, local_start, local_end) in BROLL_CUTAWAYS.items():
+        path = BROLL_DIR / filename
+        if path.suffix.lower() in {".webp", ".jpg", ".jpeg", ".png"}:
+            with Image.open(path) as im:
+                cache[clip_id] = [fit_broll_frame(im)]
+            continue
+        container = av.open(str(path))
+        frames = []
+        stream = container.streams.video[0]
+        nominal_fps = float(stream.average_rate) if stream.average_rate else FPS
+        take_count = max(1, int(math.ceil((local_end - local_start) * FPS)))
+        for frame in container.decode(video=0):
+            source_t = float(frame.pts * frame.time_base) if frame.pts is not None else len(frames) / nominal_fps
+            if source_t < local_start:
+                continue
+            if source_t >= local_end:
+                break
+            frames.append(fit_broll_frame(frame.to_image()))
+            if len(frames) >= take_count:
+                break
+        container.close()
+        if not frames:
+            raise RuntimeError(f"No decodable B-roll frames from {path}")
+        cache[clip_id] = frames
+        print(f"      Cached {len(frames)} B-roll frames for {clip_id} from {filename}")
+    return cache
+
+
+def load_youtube_audio_library_track(total_samples: int, sr: int) -> np.ndarray:
+    """Decode the chosen YouTube Audio Library track to stereo float64 at project rate."""
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    result = subprocess.run(
+        [ffmpeg, "-v", "error", "-i", str(MUSIC_FILE), "-f", "f64le", "-acodec", "pcm_f64le", "-ac", "2", "-ar", str(sr), "pipe:1"],
+        check=True, capture_output=True,
+    )
+    track = np.frombuffer(result.stdout, dtype="<f8").reshape(-1, 2).copy()
+    if len(track) < total_samples:
+        track = np.tile(track, (int(math.ceil(total_samples / len(track))), 1))
+    track = track[:total_samples]
+    fade = min(int(0.35 * sr), total_samples // 2)
+    if fade:
+        track[:fade] *= np.linspace(0.0, 1.0, fade)[:, None]
+        track[-fade:] *= np.linspace(1.0, 0.0, fade)[:, None]
+    return track
+
+
 def build_edited_video():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
@@ -674,6 +749,8 @@ def build_edited_video():
     container.close()
     src_pts = np.array([p for p, _ in src_frames])
     print(f"      Cached {len(src_frames)} relevant source frames.")
+    broll_frames = load_broll_frames()
+    stock_badge = make_stock_badge()
 
     def get_src_frame(t_sec: float) -> Image.Image:
         idx = int(np.argmin(np.abs(src_pts - t_sec)))
@@ -734,15 +811,15 @@ def build_edited_video():
     print(f"      Tight speech edit : {speech_end_sec:.2f}s across {len(CLIPS)} complete sentences")
     print(f"      Total with CTA    : {total_duration:.2f}s ({total_frames} frames @ {FPS}fps)")
 
-    print("[3/5] Mastering audio (ducked acoustic bed + synced motion-graphic SFX + LUFS mastering)...")
-    music_bed = synth_ambient_music_bed(total_duration + 0.5, SR)[:total_samples]
+    print("[3/5] Mastering audio (YouTube Audio Library music ducked under voice + synced SFX)...")
+    music_bed = load_youtube_audio_library_track(total_samples, SR)
     # Auto-duck music bed: 0.085 under active speech, rising smoothly to 0.22 on the CTA outro card
-    duck_gain = np.full(total_samples, 0.085, dtype=np.float64)
+    duck_gain = np.full(total_samples, 0.12, dtype=np.float64)
     outro_start_smp = int(speech_end_sec * SR)
     ramp_len = min(int(0.45 * SR), total_samples - outro_start_smp)
     if ramp_len > 0:
-        duck_gain[outro_start_smp : outro_start_smp + ramp_len] = np.linspace(0.085, 0.23, ramp_len)
-        duck_gain[outro_start_smp + ramp_len :] = 0.23
+        duck_gain[outro_start_smp : outro_start_smp + ramp_len] = np.linspace(0.12, 0.24, ramp_len)
+        duck_gain[outro_start_smp + ramp_len :] = 0.24
     # Fade out last 0.45s cleanly
     fo = int(0.45 * SR)
     duck_gain[-fo:] *= np.linspace(1.0, 0.0, fo)
@@ -847,6 +924,24 @@ def build_edited_video():
         "total_edited_duration_sec": round(total_duration, 3),
         "resolution": f"{W}x{H}",
         "fps": FPS,
+        "asset_credits_file": "Latur_Property_Asset_Credits.md",
+        "background_music": {
+            "title": "Sunny Travel",
+            "artist": "Nico Staf",
+            "source": "YouTube Audio Library",
+            "attribution": "Not required (per the library track catalogue)",
+            "mix": "Ducked under narration at 0.12 gain; rises to 0.24 on the silent closing card; fades out at the end.",
+        },
+        "illustrative_broll": [
+            {
+                "clip_id": clip_id,
+                "asset": asset,
+                "timeline_range_sec": [local_start, local_end],
+                "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+                "disclaimer": "Generic illustrative stock; does not depict the listed property.",
+            }
+            for clip_id, (asset, local_start, local_end) in BROLL_CUTAWAYS.items()
+        ],
         "removed_sections_summary": [
             "0.00s - 1.50s: Initial dead air before greeting",
             "4.65s - 5.23s, 7.14s - 7.67s, 11.34s - 12.22s: Breaths, silences & 'अं' filler onset before plot size",
@@ -926,14 +1021,25 @@ def build_edited_video():
             u = max(0.0, min(1.0, (t - active["tl_start"]) / max(1e-6, active["tl_dur"])))
             src_t = sp.src_start + u * (sp.src_end - sp.src_start)
             zoom = sp.zoom_start + (sp.zoom_end - sp.zoom_start) * u
-
-            base_rgb = enhance_frame(get_src_frame(src_t), zoom=zoom)
+            local_t = t - active["tl_start"]
+            broll_spec = BROLL_CUTAWAYS.get(sp.id)
+            use_broll = bool(broll_spec and broll_spec[1] <= local_t < broll_spec[2])
+            if use_broll:
+                frames = broll_frames[sp.id]
+                idx_b = min(len(frames) - 1, int((local_t - broll_spec[1]) * FPS))
+                shot = frames[idx_b]
+                shot_zoom = 1.0 + 0.025 * (local_t / max(0.1, active["tl_dur"]))
+                base_rgb = enhance_frame(shot, zoom=shot_zoom)
+            else:
+                base_rgb = enhance_frame(get_src_frame(src_t), zoom=zoom)
             canvas = base_rgb.convert("RGBA")
 
             # Bottom gradient & top persistent location header
             canvas.alpha_composite(bot_grad_img, (0, H - 440))
             hdr_alpha = min(1.0, t / 0.30)
             canvas.alpha_composite(apply_alpha(top_header_img, hdr_alpha), (0, 0))
+            if use_broll:
+                canvas.alpha_composite(stock_badge, (W - stock_badge.width - 42, 154))
 
             # Progress bar along very top (subtle gold progress line)
             prog_w = max(2, int(W * (t / total_duration)))

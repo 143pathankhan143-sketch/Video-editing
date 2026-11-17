@@ -5,6 +5,75 @@
   "total_edited_duration_sec": 22.37,
   "resolution": "1080x1920",
   "fps": 30,
+  "background_music": {
+    "title": "Sunny Travel",
+    "artist": "Nico Staf",
+    "source": "YouTube Audio Library",
+    "attribution": "Not required (per the library track catalogue)",
+    "mix": "Ducked under narration at 0.12 gain; rises to 0.24 on the silent closing card; fades out at the end."
+  },
+  "illustrative_broll": [
+    {
+      "clip_id": "02_bhk_config",
+      "asset": "pexels_16428573_interior_walkthrough.mp4",
+      "timeline_range_sec": [
+        0.0,
+        1.91
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    },
+    {
+      "clip_id": "03_rooms_and_price",
+      "asset": "pexels_16428573_interior_walkthrough.mp4",
+      "timeline_range_sec": [
+        0.0,
+        1.62
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    },
+    {
+      "clip_id": "05_innova_parking",
+      "asset": "pexels_car_parking.mp4",
+      "timeline_range_sec": [
+        0.0,
+        1.17
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    },
+    {
+      "clip_id": "08_developed_locality",
+      "asset": "pexels_8440736_estate_aerial.mp4",
+      "timeline_range_sec": [
+        0.0,
+        1.64
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    },
+    {
+      "clip_id": "09_vip_bungalows",
+      "asset": "pexels_14502236_bungalows_aerial.mp4",
+      "timeline_range_sec": [
+        0.0,
+        1.16
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    },
+    {
+      "clip_id": "11_rental_income",
+      "asset": "pexels_living_room.webp",
+      "timeline_range_sec": [
+        0.0,
+        1.92
+      ],
+      "source": "Pexels stock via source manifest/repository; see output/Latur_Property_Asset_Credits.md",
+      "disclaimer": "Generic illustrative stock; does not depict the listed property."
+    }
+  ],
   "removed_sections_summary": [
     "0.00s - 1.50s: Initial dead air before greeting",
     "4.65s - 5.23s, 7.14s - 7.67s, 11.34s - 12.22s: Breaths, silences & 'अं' filler onset before plot size",
@@ -171,5 +240,6 @@
         "सुंदर घर आहे, भाडेकरू पण सहज मिळू शकतात!"
       ]
     }
-  ]
+  ],
+  "asset_credits_file": "Latur_Property_Asset_Credits.md"
 }
